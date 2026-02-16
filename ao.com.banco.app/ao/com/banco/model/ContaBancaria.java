@@ -74,5 +74,9 @@ public abstract class ContaBancaria {
 
     public abstract void sacar(double valor);
     public abstract double calcularRendimento();
+    public abstract void transferir(ContaBancaria contaBancaria,double valor);
+    public abstract ArrayList<Transacao> gerarExtrato() ;
+
+
 
 }
