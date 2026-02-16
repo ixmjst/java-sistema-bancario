@@ -28,6 +28,11 @@ public class ContaPoupanca extends ContaBancaria{
     public void sacar(double valor) {
         if (valor<this.getSaldo()) {
             this.setSaldo(this.getSaldo() - valor);
+            this.adicionarTransacao(new Transacao(TipoTransacao.SAQUE, valor, LocalDate.now(), "Levantamento"));
+        } else if (this.getStatus() != StatusConta.ATIVA) {
+            System.out.println("ERRO...Precisa ativar a conta!!");
+        } else {
+            System.out.println("N e possivel retirar o montante solicitado");
         }
     }
 
