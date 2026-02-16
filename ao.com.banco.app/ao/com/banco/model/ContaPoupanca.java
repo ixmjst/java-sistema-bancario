@@ -21,7 +21,11 @@ public class ContaPoupanca extends ContaBancaria{
 
     @Override
     public void depositar(double valor) {
-        this.setSaldo(this.getSaldo()+valor);
+        if ((valor > 0) && (this.getStatus() != StatusConta.INATIVA)) {
+            this.setSaldo(this.getSaldo() + valor);
+            this.adicionarTransacao(new Transacao(TipoTransacao.SAQUE, valor, LocalDate.now(), "Deposito"));
+        }
+        System.out.println("Saldo deve ser maior que 0 e a conta deve estar Ativa");
     }
 
     @Override
