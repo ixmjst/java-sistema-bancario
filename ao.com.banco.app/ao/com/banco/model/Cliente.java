@@ -6,7 +6,7 @@ public class Cliente {
     private String nome;
     private String BI;
     private String telefone;
-    ArrayList <ContaBancaria>contas=new ArrayList();
+    private ArrayList <ContaBancaria>contas=new ArrayList();
 
     public String getNome() {
         return nome;
@@ -44,5 +44,11 @@ public class Cliente {
                 ", telefone='" + telefone + '\'' +
                 ", contas=" + contas +
                 '}';
+    }
+
+    public Cliente(String nome, String BI, String telefone) {
+        this.nome = nome;
+        this.BI = BI;
+        this.telefone = telefone;
     }
 }
