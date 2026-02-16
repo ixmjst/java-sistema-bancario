@@ -14,7 +14,8 @@ public class ContaPoupanca extends ContaBancaria{
         this.taxaJuros = taxaJuros;
     }
 
-    public ContaPoupanca(int numero, double saldo, String titular, StatusConta status) {
+
+    public ContaPoupanca(int numero, double saldo, String titular, StatusConta status, double taxaJuros) {
         super(numero, saldo, titular, status);
     }
 
