@@ -61,7 +61,7 @@ public class BancoService {
                 valorAbertura = ler.nextDouble();
             }
             Cliente cliente = new Cliente(nome, bi, numeroTelefone);
-            ContaPoupanca contaPoupanca = new ContaPoupanca(randomNum, valorAbertura, cliente.getNome(), StatusConta.ATIVA);
+            ContaPoupanca contaPoupanca = new ContaPoupanca(randomNum, valorAbertura, cliente.getNome(), StatusConta.ATIVA, 1.5);
             cliente.adicionarConta(contaPoupanca);
             adicionarClientes(cliente);
         } else {
