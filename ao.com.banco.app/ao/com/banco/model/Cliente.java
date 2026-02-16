@@ -45,7 +45,13 @@ public class Cliente {
                 ", contas=" + contas +
                 '}';
     }
-
+    public void adicionarConta(ContaBancaria conta){
+        this.getContas().add(conta);
+    }
+    public void removerConta(int id){
+         ContaBancaria contaBancaria=this.contas.get(id);
+         this.contas.remove(contaBancaria);
+    }
     public Cliente(String nome, String BI, String telefone) {
         this.nome = nome;
         this.BI = BI;
