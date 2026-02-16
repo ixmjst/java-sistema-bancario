@@ -91,7 +91,17 @@ public class BancoService {
         }
    }
 
-    public static ContaBancaria buscarPorNumero(int id) {
+    public static void removerCliente(int id) {
+        if (clientes.isEmpty()) {
+            System.out.println("Lista vazia");
+        } else if (clientes.contains(id)) {
+            clientes.remove(id);
+        }
+
+
+    }
+
+    public static ContaBancaria buscarPorNumero(int numeroConta) {
         ContaBancaria contaBancaria = null;
         if (clientes == null) {
             return null;
