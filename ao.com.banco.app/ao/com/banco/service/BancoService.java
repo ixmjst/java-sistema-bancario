@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class BancoService {
-    private static Scanner ler = new Scanner(System.in);
+    private static final Scanner ler = new Scanner(System.in);
     private static ArrayList<Cliente> clientes;
 
     private static void adicionarClientes(Cliente cliente) {
