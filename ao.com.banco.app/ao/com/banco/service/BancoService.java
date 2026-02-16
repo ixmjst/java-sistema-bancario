@@ -80,8 +80,16 @@ public class BancoService {
         }
     }
 
-    public static ArrayList<Transacao> gerarExtrato() {
-    }
+   public static void mostrarClientes(){
+        for (Cliente cliente: clientes) {
+
+            System.out.println(cliente);
+            System.out.print(":");
+            for (ContaBancaria conta : cliente.getContas()) {
+                System.out.println(conta);
+            }
+        }
+   }
 
     public static ContaBancaria buscarPorNumero(int id) {
         ContaBancaria contaBancaria = null;
