@@ -17,13 +17,15 @@ public class ContaCorrente extends ContaBancaria{
     }
 
     @Override
-    double sacar(double amount) {
-        return 0;
+    void sacar(double amount) {
+        if (amount<this.getSaldo()) {
+            this.setSaldo(this.getSaldo() - amount);
+        }
     }
 
     @Override
-    void calcularRendimento() {
-
+    double calcularRendimento() {
+       return 0.0;
     }
 
 
