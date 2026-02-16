@@ -3,7 +3,7 @@ package ao.com.banco.model;
 import ao.com.banco.enums.StatusConta;
 import jdk.jshell.Snippet;
 
-abstract class ContaBancaria {
+public abstract class ContaBancaria {
 
     private int numero;
     private String titular;
