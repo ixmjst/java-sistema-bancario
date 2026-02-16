@@ -45,6 +45,13 @@ public class Transacao {
         this.descricao = descricao;
     }
 
+    public Transacao(TipoTransacao tipoTransacao, double valor, LocalDate data, String descricao) {
+        this.tipoTransacao = tipoTransacao;
+        this.valor = valor;
+        this.data = data;
+        this.descricao = descricao;
+    }
+
     @Override
     public String toString() {
         return "Transacao{" +
