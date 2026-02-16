@@ -1,11 +1,14 @@
 package ao.com.banco.model;
 
+import ao.com.banco.enums.StatusConta;
+import jdk.jshell.Snippet;
+
 abstract class ContaBancaria {
 
     private int numero;
     private String titular;
     private double saldo;
-    private boolean status;
+    private StatusConta status;
 
     public int getNumero() {
         return numero;
@@ -31,15 +34,15 @@ abstract class ContaBancaria {
         this.saldo = saldo;
     }
 
-    public boolean isStatus() {
+    public StatusConta statusConta() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(StatusConta status) {
         this.status = status;
     }
 
-    public ContaBancaria(int numero, double saldo, String titular, boolean status) {
+    public ContaBancaria(int numero, double saldo, String titular, StatusConta status) {
         this.numero = numero;
         this.saldo = saldo;
         this.titular = titular;

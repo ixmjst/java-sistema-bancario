@@ -1,5 +1,7 @@
 package ao.com.banco.model;
 
+import ao.com.banco.enums.StatusConta;
+
 public class ContaPoupanca extends ContaBancaria{
 
     private double taxaJuros;
@@ -12,7 +14,7 @@ public class ContaPoupanca extends ContaBancaria{
         this.taxaJuros = taxaJuros;
     }
 
-    public ContaPoupanca(int numero, double saldo, String titular, boolean status) {
+    public ContaPoupanca(int numero, double saldo, String titular, StatusConta status) {
         super(numero, saldo, titular, status);
     }
 
