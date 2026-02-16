@@ -3,12 +3,15 @@ package ao.com.banco.model;
 import ao.com.banco.enums.StatusConta;
 import jdk.jshell.Snippet;
 
+import java.util.ArrayList;
+
 public abstract class ContaBancaria {
 
     private int numero;
     private String titular;
     private double saldo;
     private StatusConta status;
+    private ArrayList<Transacao> transacoes;
 
     public int getNumero() {
         return numero;
@@ -30,13 +33,21 @@ public abstract class ContaBancaria {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    protected void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
-    public StatusConta statusConta() {
+    public StatusConta getStatus() {
         return status;
     }
+
+
+
+    public  ArrayList<Transacao> getTransacoes() {
+        return transacoes;
+    }
+    public void adicionarTransacao(Transacao transacao){transacoes.add(transacao);}
+
 
     public void setStatus(StatusConta status) {
         this.status = status;
@@ -59,9 +70,9 @@ public abstract class ContaBancaria {
                 '}';
     }
 
-    abstract void depositar(double valor);
+    public abstract void depositar(double valor);
 
-    abstract void sacar(double valor);
-    abstract double calcularRendimento();
+    public abstract void sacar(double valor);
+    public abstract double calcularRendimento();
 
 }
