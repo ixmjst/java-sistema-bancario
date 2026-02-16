@@ -36,4 +36,20 @@ public class ContaPoupanca extends ContaBancaria{
          return (this.getSaldo()*this.taxaJuros);
     }
 
+    @Override
+    public void transferir(ContaBancaria contaDestino, double valor) {
+        this.sacar(valor);
+        contaDestino.depositar(valor);
+        this.adicionarTransacao(new Transacao(TipoTransacao.TRANSFERENCIA, valor, LocalDate.now(), "Tranferencia"));
+
+    }
+
+    @Override
+    public void gerarExtrato() {
+        for (Transacao transacao: this.getTransacoes()){
+            System.out.println(transacao);
+
+        }
+    }
+
 }
