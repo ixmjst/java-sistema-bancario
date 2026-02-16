@@ -59,9 +59,9 @@ public abstract class ContaBancaria {
                 '}';
     }
 
-    abstract void depositar(double amount);
+    abstract void depositar(double valor);
 
-    abstract void sacar(double amount);
+    abstract void sacar(double valor);
     abstract double calcularRendimento();
 
 }

@@ -12,14 +12,14 @@ public class ContaCorrente extends ContaBancaria{
     }
 
     @Override
-    void depositar(double amount) {
-        this.setSaldo(this.getSaldo()+amount);
+    void depositar(double valor) {
+        this.setSaldo(this.getSaldo()+valor);
     }
 
     @Override
-    void sacar(double amount) {
-        if (amount<this.getSaldo()) {
-            this.setSaldo(this.getSaldo() - amount);
+    void sacar(double valor) {
+        if (valor<this.getSaldo()) {
+            this.setSaldo(this.getSaldo() - valor);
         }
     }
 
