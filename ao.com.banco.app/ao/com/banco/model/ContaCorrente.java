@@ -37,7 +37,10 @@ public class ContaCorrente extends ContaBancaria{
 
     @Override
     public void  gerarExtrato() {
-       
+       for (Transacao transacao: this.getTransacoes()){
+           System.out.println(transacao);
+
+       }
     }
 
 
