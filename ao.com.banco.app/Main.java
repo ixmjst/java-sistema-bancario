@@ -14,6 +14,12 @@ void main() {
 
         switch (esc){
             case 1:
+                System.out.println("1-Criar Conta");
+                System.out.println("2-Mostrar Clientes");
+                System.out.println("3-Remover Clientes");
+                System.out.println("4-Buscar por Clientes pelo Num. da Conta");
+                System.out.println("");
+
                 break;
             case 2:
                 break;
