@@ -3,6 +3,7 @@ package ao.com.banco.model;
 import java.util.ArrayList;
 
 public class Cliente {
+    private int id;
     private String nome;
     private String BI;
     private String telefone;
