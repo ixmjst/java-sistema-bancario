@@ -141,9 +141,10 @@ public class BancoService {
         } else if (op == 2) {
             BancoService.mostrarClientes();
         } else if (op == 3) {
-            System.out.println("Digite o ID:");
-            int id = ler.nextInt();
-            BancoService.removerCliente(id);
+            System.out.println("Digite o Valor a Sacar:");
+            double valor = ler.nextDouble();
+            contaBancaria.sacar(valor);
+
         } else if (op == 4) {
             System.out.println("Digite o numero da Conta:");
             int numero = ler.nextInt();
