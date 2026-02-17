@@ -123,6 +123,81 @@ public class BancoService {
         return contaBancaria;
 
     }
+    public static void clienteServico(){
+        System.out.println("Numero da Conta:");
+        int numeroConta=ler.nextInt();
+        ContaBancaria contaBancaria=buscarPorNumero(numeroConta);
+        System.out.println("===BEM-VINDO DEVOLTA!===");
+        System.out.println("1-Ver Saldo");
+        System.out.println("2-Tranferir pra outra Conta( mesmo proprietario)");
+        System.out.println("3-Remover Conta");
+        System.out.println("4-Sacar");
+        System.out.println("5-Depositar");
+        System.out.println("6-Gerar extrato");
+        System.out.println("(0)-Sair");
+        int op = ler.nextInt();
+        if (op == 1) {
+            System.out.println(contaBancaria.getSaldo());
+        } else if (op == 2) {
+            BancoService.mostrarClientes();
+        } else if (op == 3) {
+            System.out.println("Digite o ID:");
+            int id = ler.nextInt();
+            BancoService.removerCliente(id);
+        } else if (op == 4) {
+            System.out.println("Digite o numero da Conta:");
+            int numero = ler.nextInt();
+            BancoService.buscarPorNumero(numero);
+        } else if (op == 5) {
+            System.out.println("Digite a conta Origem:");
+            int numContaOrigem = ler.nextInt();
+            System.out.println("Digite a contaDestino:");
+            int numContaDestino = ler.nextInt();
+            System.out.println("Digite o valor:");
+            double valor = ler.nextDouble();
+            BancoService.transferirPorNumero(numContaOrigem, numContaDestino, valor);
+        } else {
+            System.out.println("Opcao Indisponivel");
+        }
+
+
+
+
+    }
+    public static void BancoServiceMenu(){
+        System.out.println("1-Criar Conta");
+        System.out.println("2-Mostrar Clientes");
+        System.out.println("3-Remover Clientes");
+        System.out.println("4-Buscar por Clientes pelo Num. da Conta");
+        System.out.println("5-Transferir pelo Num. da Conta");
+        System.out.println("6-Efetuar Operacoes");
+        System.out.println("(0)-sair");
+        int op = ler.nextInt();
+        if (op == 1) {
+            BancoService.criarConta();
+        } else if (op == 2) {
+            BancoService.mostrarClientes();
+        } else if (op == 3) {
+            System.out.println("Digite o ID:");
+            int id = ler.nextInt();
+            BancoService.removerCliente(id);
+        } else if (op == 4) {
+            System.out.println("Digite o numero da Conta:");
+            int numero = ler.nextInt();
+            BancoService.buscarPorNumero(numero);
+        } else if (op == 5) {
+            System.out.println("Digite a conta Origem:");
+            int numContaOrigem = ler.nextInt();
+            System.out.println("Digite a contaDestino:");
+            int numContaDestino = ler.nextInt();
+            System.out.println("Digite o valor:");
+            double valor = ler.nextDouble();
+            BancoService.transferirPorNumero(numContaOrigem, numContaDestino, valor);
+        } else {
+            System.out.println("Opcao Indisponivel");
+        }
+
+    }
 
 
 }
