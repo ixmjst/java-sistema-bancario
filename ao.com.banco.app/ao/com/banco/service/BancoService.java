@@ -77,7 +77,7 @@ public class BancoService {
             ContaBancaria conta1 = buscarPorNumero(numContaOrigem);
             ContaBancaria conta2 = buscarPorNumero(numContaDestino);
             conta1.transferir(conta2, valor);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             throw new ContaInativaException("Conta Inativa");
         }
     }
