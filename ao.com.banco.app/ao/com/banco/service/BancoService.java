@@ -70,9 +70,11 @@ public class BancoService {
 
     }
 
-    public static void transferirPorNumo(int numContaOrigem, int numContaDestino, double valor) {
+    public static void transferirPorNumero(int numContaOrigem, int numContaDestino, double valor) {
         try {
-            ContaBancaria conta1 = buscarPorNumero(numContaDestino);
+
+
+            ContaBancaria conta1 = buscarPorNumero(numContaOrigem);
             ContaBancaria conta2 = buscarPorNumero(numContaDestino);
             conta1.transferir(conta2, valor);
         } catch (Exception e) {
