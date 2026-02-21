@@ -11,7 +11,7 @@ public abstract class ContaBancaria {
     private String titular;
     private double saldo;
     private StatusConta status;
-    private ArrayList<Transacao> transacoes;
+    private ArrayList<Transacao> transacoes=new ArrayList<>();
 
     public int getNumero() {
         return numero;

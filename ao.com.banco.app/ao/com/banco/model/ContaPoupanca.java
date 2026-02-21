@@ -1,8 +1,13 @@
 package ao.com.banco.model;
 
 import ao.com.banco.enums.StatusConta;
+import ao.com.banco.enums.TipoTransacao;
+import ao.com.banco.exceptions.SaldoInsuficienteException;
 
-public class ContaPoupanca extends ContaBancaria{
+import java.time.LocalDate;
+
+
+public class ContaPoupanca extends ContaBancaria {
 
     private double taxaJuros;
 
@@ -17,33 +22,34 @@ public class ContaPoupanca extends ContaBancaria{
 
     public ContaPoupanca(int numero, double saldo, String titular, StatusConta status, double taxaJuros) {
         super(numero, saldo, titular, status);
+        this.taxaJuros = taxaJuros;
     }
-
 
     @Override
     public void depositar(double valor) {
         if ((valor > 0) && (this.getStatus() != StatusConta.INATIVA)) {
             this.setSaldo(this.getSaldo() + valor);
             this.adicionarTransacao(new Transacao(TipoTransacao.SAQUE, valor, LocalDate.now(), "Deposito"));
+        } else {
+            throw new SaldoInsuficienteException("Saldo deve ser maior que 0 e a conta deve estar Ativa");
         }
-        System.out.println("Saldo deve ser maior que 0 e a conta deve estar Ativa");
     }
 
     @Override
     public void sacar(double valor) {
-        if (valor<this.getSaldo()) {
+        if ((valor < this.getSaldo()) && (valor > 0)) {
             this.setSaldo(this.getSaldo() - valor);
             this.adicionarTransacao(new Transacao(TipoTransacao.SAQUE, valor, LocalDate.now(), "Levantamento"));
         } else if (this.getStatus() != StatusConta.ATIVA) {
             System.out.println("ERRO...Precisa ativar a conta!!");
         } else {
-            System.out.println("N e possivel retirar o montante solicitado");
+            throw new SaldoInsuficienteException("Saldo Insuficiente...Deposite  e Tente mais tarde! (^-^)");
         }
     }
 
     @Override
     public double calcularRendimento() {
-         return (this.getSaldo()*this.taxaJuros);
+        return (this.getSaldo() * this.taxaJuros);
     }
 
     @Override
@@ -56,7 +62,7 @@ public class ContaPoupanca extends ContaBancaria{
 
     @Override
     public void gerarExtrato() {
-        for (Transacao transacao: this.getTransacoes()){
+        for (Transacao transacao : this.getTransacoes()) {
             System.out.println(transacao);
 
         }

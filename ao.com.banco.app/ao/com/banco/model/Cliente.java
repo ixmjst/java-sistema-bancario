@@ -1,6 +1,7 @@
 package ao.com.banco.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Cliente {
     private int id;
@@ -11,6 +12,14 @@ public class Cliente {
 
     public String getNome() {
         return nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setNome(String nome) {
@@ -36,7 +45,14 @@ public class Cliente {
     public ArrayList<ContaBancaria> getContas() {
         return contas;
     }
+    public Cliente() {
+    }
 
+    public Cliente(String nome, String BI, String telefone) {
+        this.nome = nome;
+        this.BI = BI;
+        this.telefone = telefone;
+    }
     @Override
     public String toString() {
         return "Cliente{" +
@@ -53,9 +69,14 @@ public class Cliente {
          ContaBancaria contaBancaria=this.contas.get(id);
          this.contas.remove(contaBancaria);
     }
-    public Cliente(String nome, String BI, String telefone) {
-        this.nome = nome;
-        this.BI = BI;
-        this.telefone = telefone;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(BI, cliente.BI);
     }
+
+
+
 }

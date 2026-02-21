@@ -2,16 +2,17 @@ package ao.com.banco.service;
 
 import ao.com.banco.enums.StatusConta;
 import ao.com.banco.exceptions.ContaInativaException;
+import ao.com.banco.exceptions.NullLabelException;
 import ao.com.banco.model.*;
+import com.sun.tools.javac.Main;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class BancoService {
     private static final Scanner ler = new Scanner(System.in);
-    private static ArrayList<Cliente> clientes;
+    private static final ArrayList<Cliente> clientes = new ArrayList<>();
 
     private static void adicionarClientes(Cliente cliente) {
         clientes.add(cliente);
@@ -41,7 +42,7 @@ public class BancoService {
                 valorAbertura = ler.nextDouble();
             }
             Cliente cliente = new Cliente(nome, bi, numeroTelefone);
-            ContaCorrente contaCorrente = new ContaCorrente(randomNum, valorAbertura, cliente.getNome(), StatusConta.ATIVA, 50000);
+            ContaCorrente contaCorrente = new ContaCorrente(Math.abs(randomNum), valorAbertura, cliente.getNome(), StatusConta.ATIVA, 50000);
             cliente.adicionarConta(contaCorrente);
             adicionarClientes(cliente);
 
@@ -61,7 +62,7 @@ public class BancoService {
                 valorAbertura = ler.nextDouble();
             }
             Cliente cliente = new Cliente(nome, bi, numeroTelefone);
-            ContaPoupanca contaPoupanca = new ContaPoupanca(randomNum, valorAbertura, cliente.getNome(), StatusConta.ATIVA, 1.5);
+            ContaPoupanca contaPoupanca = new ContaPoupanca(Math.abs(randomNum), valorAbertura, cliente.getNome(), StatusConta.ATIVA, 1.5);
             cliente.adicionarConta(contaPoupanca);
             adicionarClientes(cliente);
         } else {
@@ -82,96 +83,124 @@ public class BancoService {
         }
     }
 
-   public static void mostrarClientes(){
-        for (Cliente cliente: clientes) {
+    public static void mostrarClientes() {
+        try {
+            for (Cliente cliente : clientes) {
 
-            System.out.println(cliente);
-            System.out.print(":");
-            for (ContaBancaria conta : cliente.getContas()) {
-                System.out.println(conta);
+                System.out.println(cliente);
+
             }
+        } catch (RuntimeException e) {
+            throw new NullLabelException("Lista Vazia");
         }
-   }
+    }
+
 
     public static void removerCliente(int id) {
-        if (clientes.isEmpty()) {
-            System.out.println("Lista vazia");
-        } else if (clientes.contains(id)) {
-            clientes.remove(id);
+        try {
+            if ((clientes.contains(clientes.get(id)))) {
+                clientes.remove(id);
+            }
+
+        } catch (RuntimeException e) {
+            throw new NullLabelException("Lista Vazia");
         }
-
-
     }
 
     public static ContaBancaria buscarPorNumero(int numeroConta) {
         ContaBancaria contaBancaria = null;
         if (clientes == null) {
             return null;
-        }
-        for (Cliente cliente : clientes) {
-            for (ContaBancaria conta : cliente.getContas()) {
+        } else {
+            for (Cliente cliente : clientes) {
+                for (ContaBancaria conta : cliente.getContas()) {
 
-                if (conta.getNumero() == id) {
-                    contaBancaria = conta;
-                    return contaBancaria;
+                    if (conta.getNumero() == numeroConta) {
+                        contaBancaria = conta;
+                        return contaBancaria;
+
+                    }
 
                 }
-
             }
         }
 
         return contaBancaria;
 
     }
-    public static void clienteServico(){
-        System.out.println("Numero da Conta:");
-        int numeroConta=ler.nextInt();
-        ContaBancaria contaBancaria=buscarPorNumero(numeroConta);
-        System.out.println("===BEM-VINDO DEVOLTA!===");
-        System.out.println("1-Ver Saldo");
-        System.out.println("2-Tranferir pra outra Conta( mesmo proprietario)");
-        System.out.println("3-Remover Conta");
-        System.out.println("4-Sacar");
-        System.out.println("5-Depositar");
-        System.out.println("6-Gerar extrato");
-        System.out.println("(0)-Sair");
-        int op = ler.nextInt();
-        if (op == 1) {
-            System.out.println(contaBancaria.getSaldo());
-        } else if (op == 2) {
-            BancoService.mostrarClientes();
-        } else if (op == 3) {
-            System.out.println("Digite o Valor a Sacar:");
-            double valor = ler.nextDouble();
-            contaBancaria.sacar(valor);
 
-        } else if (op == 4) {
-            System.out.println("Digite o numero da Conta:");
-            int numero = ler.nextInt();
-            BancoService.buscarPorNumero(numero);
-        } else if (op == 5) {
-            System.out.println("Digite a conta Origem:");
-            int numContaOrigem = ler.nextInt();
-            System.out.println("Digite a contaDestino:");
-            int numContaDestino = ler.nextInt();
-            System.out.println("Digite o valor:");
-            double valor = ler.nextDouble();
-            BancoService.transferirPorNumero(numContaOrigem, numContaDestino, valor);
+    public static void clienteServico(int numeroConta) {
+
+        if (buscarPorNumero(numeroConta) != null) {
+            ContaBancaria contaBancaria = buscarPorNumero(numeroConta);
+
+            System.out.println("===BEM-VINDO DEVOLTA!===");
+            System.out.println("1-Ver Saldo");
+            System.out.println("2-Tranferir pra outra Conta( mesmo proprietario)");
+            System.out.println("3-Sacar");
+            System.out.println("4-Depositar");
+            System.out.println("5-Gerar extrato");
+            System.out.println("(0)-Voltar");
+            int op = ler.nextInt();
+
+
+            if (op == 1) {
+                if ((contaBancaria instanceof ContaPoupanca) || (contaBancaria instanceof ContaCorrente)) {
+                    System.out.println("Saldo Atual: "+contaBancaria.getSaldo());
+                }
+
+                clienteServico(numeroConta);
+            } else if (op == 2) {
+                System.out.println("Valor:");
+                double valor = ler.nextDouble();
+                System.out.println("Numero da Conta Destino:");
+                int numeroContaDestino = ler.nextInt();
+                try {
+                    ContaBancaria contaBancariaDestino = buscarPorNumero(numeroContaDestino);
+                    if ((contaBancaria instanceof ContaPoupanca) || (contaBancaria instanceof ContaCorrente)) {
+                        if (contaBancaria.getTitular().compareTo(contaBancariaDestino.getTitular()) == 0) {
+                            contaBancaria.transferir(contaBancariaDestino, valor);
+                        } else {
+                            System.out.println("So e possivel pra contas cujo o  proprietario e o  mesmo");
+                        }
+                    }
+
+                } catch (Exception e) {
+                    throw new ContaInativaException("Conta Inativa...crie uma Segunda Conta!");
+                }
+
+            } else if (op == 3) {
+                System.out.println("Digite o Valor a Sacar:");
+                double valor = ler.nextDouble();
+                if ((contaBancaria instanceof ContaPoupanca) || (contaBancaria instanceof ContaCorrente)) {
+                    contaBancaria.sacar(valor);
+                }
+            } else if (op == 4) {
+                System.out.println("Digite  o  Valor a depositar:");
+                double valor = ler.nextDouble();
+                if ((contaBancaria instanceof ContaPoupanca) || (contaBancaria instanceof ContaCorrente)) {
+                    contaBancaria.depositar(valor);
+                }
+            } else if (op == 5) {
+                if ((contaBancaria instanceof ContaPoupanca) || (contaBancaria instanceof ContaCorrente)) {
+                    contaBancaria.gerarExtrato();
+                }
+            } else {
+                System.out.println("Opcao Indisponivel");
+            }
         } else {
-            System.out.println("Opcao Indisponivel");
+            System.out.println("Conta Inativa...Crie uma conta antes!");
         }
 
 
-
-
     }
-    public static void BancoServiceMenu(){
+
+    public static void BancoServiceMenu() {
         System.out.println("1-Criar Conta");
         System.out.println("2-Mostrar Clientes");
         System.out.println("3-Remover Clientes");
         System.out.println("4-Buscar por Clientes pelo Num. da Conta");
         System.out.println("5-Transferir pelo Num. da Conta");
-        System.out.println("6-Efetuar Operacoes");
         System.out.println("(0)-sair");
         int op = ler.nextInt();
         if (op == 1) {
