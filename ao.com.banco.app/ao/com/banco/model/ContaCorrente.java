@@ -21,7 +21,7 @@ public class ContaCorrente extends ContaBancaria {
     public void depositar(double valor) {
         if ((valor > 0) && (this.getStatus() != StatusConta.INATIVA)) {
             this.setSaldo(this.getSaldo() + valor);
-            this.adicionarTransacao(new Transacao(TipoTransacao.SAQUE, valor, LocalDate.now(), "Deposito"));
+            this.adicionarTransacao(new Transacao(TipoTransacao.DEPOSITO, valor, LocalDate.now(), "Deposito"));
         } else {
             throw new SaldoInsuficienteException("Saldo deve ser maior que 0 e a conta deve estar Ativa");
         }
