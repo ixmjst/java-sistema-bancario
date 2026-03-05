@@ -47,7 +47,7 @@ public class ContaCorrente extends ContaBancaria {
     public void transferir(ContaBancaria contaDestino, double valor) {
         this.sacar(valor);
         contaDestino.depositar(valor);
-        this.adicionarTransacao(new Transacao(TipoTransacao.TRANSFERENCIA, valor, LocalDate.now(), "Tranferencia"));
+        this.adicionarTransacao(new Transacao(TipoTransacao.TRANSFERENCIA, valor, LocalDate.now(), "Transferencia"));
     }
 
     @Override
