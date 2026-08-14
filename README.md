@@ -1,4 +1,17 @@
-# 🏦 Sistema Bancário Java
+﻿# Sistema BancÃ¡rio em Java
+
+[![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white)](https://openjdk.org/)
+[![POO](https://img.shields.io/badge/Paradigma-Orientado%20a%20Objetos-blue)](https://en.wikipedia.org/wiki/Object-oriented_programming)
+
+> **English summary** â€” A console banking system in Java covering current and savings
+> accounts, deposits, withdrawals, transfers and customer management. Built to practise
+> object-oriented design: inheritance (`ContaBancaria` â†’ `ContaCorrente` / `ContaPoupanca`),
+> polymorphism, encapsulation and custom exceptions (`SaldoInsuficienteException`,
+> `ContaInativaException`). Requires Java 17+; compile with `javac` and run `Main`.
+> Full documentation below, in Portuguese.
+
+---
+
 
 Sistema de gerenciamento bancário desenvolvido em Java com suporte a contas correntes e poupança, transações e gestão de clientes.
 

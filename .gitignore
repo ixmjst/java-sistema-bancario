@@ -28,3 +28,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+# Configuracao de IDE
+.idea/
+*.iml
+._*
+Thumbs.db
